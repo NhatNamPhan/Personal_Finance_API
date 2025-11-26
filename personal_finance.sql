@@ -12,7 +12,9 @@ CREATE TABLE accounts (
     user_id INTEGER REFERENCES users(user_id) ON DELETE CASCADE,
     name VARCHAR(100) NOT NULL,
     balance DECIMAL(15,2) DEFAULT 0.00,
-    type VARCHAR(50) NOT NULL, -- 'checking', 'savings', 'credit_card', 'cash'
+    type VARCHAR(50) NOT NULL CHECK (
+        type IN ('checking', 'savings', 'credit_card', 'cash')
+    ), 
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 

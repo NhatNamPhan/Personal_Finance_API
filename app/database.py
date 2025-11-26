@@ -19,12 +19,14 @@ connection_pool = pool.SimpleConnectionPool(1, 20, **DB_CONFIG)
 @contextmanager
 def get_db():
     conn = connection_pool.getconn()
+    cursor = conn.cursor()
     try:
-        yield conn
+        yield cursor
         conn.commit()
     except Exception:
         conn.rollback()
         raise
     finally:
+        cursor.close()
         connection_pool.putconn(conn)
         
