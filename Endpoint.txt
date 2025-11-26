@@ -1,0 +1,7 @@
+POST /transactions - Thêm giao dịch (cập nhật balance)
+GET /users/{id}/transactions - Lịch sử giao dịch
+GET /users/{id}/spending - Thống kê chi tiêu theo danh mục
+POST /budgets - Tạo ngân sách
+GET /users/{id}/budgets/progress - Tiến độ ngân sách
+GET /users/{id}/net-worth - Tổng tài sản
+POST /accounts - Tạo tài khoản mới
