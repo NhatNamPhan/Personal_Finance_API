@@ -1,31 +1,36 @@
 User Endpoints
-POST /users - Tạo user mới
-GET /users/{user_id} - Lấy thông tin user theo ID
+POST   /users                    # Tạo user mới
+GET    /users/{user_id}          # Lấy thông tin user theo ID
 
 Account Endpoints
-POST /accounts - Tạo tài khoản mới
-GET /users/{user_id}/accounts - Lấy danh sách tài khoản của user
+POST   /accounts                 # Tạo tài khoản mới
+GET    /accounts?user_id={user_id}          # Lấy danh sách tài khoản của user
 
 Category Endpoints
-POST /categories - Tạo danh mục mới (income/expense)
-GET /users/{user_id}/categories - Lấy danh sách danh mục của user
-GET /users/{user_id}/categories?type=income - Lọc danh mục theo type (income/expense)
+POST   /categories               # Tạo danh mục mới
+GET    /categories?user_id={user_id}        # Lấy danh sách danh mục của user
+GET    /categories?user_id={user_id}&type={type}  # Lọc danh mục theo type
+GET    /categories/{category_id} # Lấy chi tiết danh mục
+PUT    /categories/{category_id} # Cập nhật danh mục
+DELETE /categories/{category_id} # Xóa danh mục
 
 Transaction Endpoints
-POST /transactions - Thêm giao dịch mới (quan trọng - tự động cập nhật balance)
-GET /users/{user_id}/transactions - Lấy lịch sử giao dịch của user
-GET /users/{user_id}/transactions?start_date=2024-01-01 - Lọc giao dịch từ ngày
-GET /users/{user_id}/transactions?end_date=2024-01-31 - Lọc giao dịch đến ngày
-GET /users/{user_id}/transactions?start_date=2024-01-01&end_date=2024-01-31 - Lọc giao dịch theo khoảng thời gian
+POST   /transactions             # Thêm giao dịch mới
+GET    /transactions?user_id={user_id}      # Lấy lịch sử giao dịch của user
+GET    /transactions?user_id={user_id}&start_date=2024-01-01&end_date=2024-01-31  # Lọc theo khoảng thời gian
+GET    /transactions/{transaction_id}       # Lấy chi tiết giao dịch
 
 Budget Endpoints
-POST /budgets - Tạo ngân sách mới
-GET /users/{user_id}/budgets - Lấy danh sách ngân sách của user
-GET /users/{user_id}/budgets?month=2024-01-01 - Lọc ngân sách theo tháng
+POST   /budgets                  # Tạo ngân sách mới
+GET    /budgets?user_id={user_id}           # Lấy danh sách ngân sách của user
+GET    /budgets?user_id={user_id}&month=2024-01-01  # Lọc ngân sách theo tháng
+GET    /budgets/{budget_id}      # Lấy chi tiết ngân sách
+PUT    /budgets/{budget_id}      # Cập nhật ngân sách
+DELETE /budgets/{budget_id}      # Xóa ngân sách
 
 Analytics Endpoints
-GET /users/{user_id}/spending?start_date=2024-01-01&end_date=2024-01-31 - Thống kê chi tiêu theo danh mục
-GET /users/{user_id}/budgets/progress?month=2024-01-01 - Tiến độ ngân sách (so sánh budget với thực tế)
-GET /users/{user_id}/net-worth - Tổng tài sảng ròng (Net Worth)
+GET    /analytics/users/{user_id}/spending?start_date=2024-01-01&end_date=2024-01-31  # Thống kê chi tiêu
+GET    /analytics/users/{user_id}/budgets/progress?month=2024-01-01  # Tiến độ ngân sách
+GET    /analytics/users/{user_id}/net-worth           # Tổng tài sản ròng
 
 
