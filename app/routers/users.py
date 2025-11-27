@@ -14,7 +14,7 @@ async def add_user(user: User):
                 "INSERT INTO users(name, email) VALUES (%s, %s) RETURNING user_id",
                 (user.name, user.email)
             )
-            new_id = cur.fetchone([0])
+            new_id = cur.fetchone()[0]
             return {"message": "User added successfully", "user_id": new_id}
     except psycopg2.Error as e:
         raise HTTPException(status_code=500, detail=f"Database error: {e.pgerror}")
@@ -33,8 +33,7 @@ async def get_user_id(user_id: int):
             return {
                 "user_id": row[0],
                 "name": row[1],
-                "email": row[2],
-                "created_at": row[3]
+                "email": row[2]
             }
     except psycopg2.Error as e:
         raise HTTPException(status_code=500, detail=f"Database error: {e.pgerror}")
