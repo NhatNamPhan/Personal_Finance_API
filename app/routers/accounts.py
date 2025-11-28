@@ -4,7 +4,7 @@ from app.utils import check_exists
 from app.models import Account
 import psycopg2
 
-router = APIRouter(prefix="/accounts", tags=['Accounts'])
+router = APIRouter(prefix="/accounts", tags=["Accounts"])
 
 @router.post("")
 async def add_account(account: Account):
