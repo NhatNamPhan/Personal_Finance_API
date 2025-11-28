@@ -30,6 +30,17 @@ class Category(BaseModel):
             raise ValueError(f"type must be one of: {', '.join(allowed)}")
         return v
 
+class CategoryUpdate(BaseModel):
+    name: str
+    type: str
+    
+    @field_validator("type")
+    def validator_type(cls, v):
+        allowed = {"income", "expense"}
+        if v not in allowed:
+            raise ValueError(f"type must be one of: {', '.join(allowed)}")
+        return v
+
 class Transaction(BaseModel):
     account_id: int
     category_id: int
