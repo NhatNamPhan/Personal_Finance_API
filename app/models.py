@@ -45,7 +45,7 @@ class Transaction(BaseModel):
     account_id: int
     category_id: int
     amount: float
-    tran_date: date
+    date: date
     description: str
     type: str
     

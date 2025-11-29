@@ -118,6 +118,3 @@ async def delete_category(category_id: int):
         raise HTTPException(status_code=500, detail=f"Database error: {e.pgerror}")
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Internal server error: {str(e)}")
- 
-    
-            
