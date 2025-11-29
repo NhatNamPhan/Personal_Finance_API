@@ -11,7 +11,7 @@ async def add_account(account: Account):
     try:
         with get_db() as cur:
             cur.execute(
-                "INSERT INTO accounts (user_id, name, balance, type) VALUES(%s, %s, %s, %s) RETURNING account_id",
+                "INSERT INTO accounts(user_id, name, balance, type) VALUES(%s, %s, %s, %s) RETURNING account_id",
                 (account.user_id, account.name, account.balance, account.type)
             )
             new_id = cur.fetchone()[0]
@@ -36,10 +36,10 @@ async def get_account_user_id(user_id: int):
                 "balance": row[3],
                 "type": row[4]
             } for row in rows]
-            return [{
+            return {
                 "user_id": user_id,
                 "accounts": accounts
-            }]
+            }
     except psycopg2.Error as e:
         raise HTTPException(status_code=500, detail=f"Database error: {e.pgerror}")
     except Exception as e:
