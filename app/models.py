@@ -67,4 +67,8 @@ class Budget(BaseModel):
         if v.day != 1:
             raise ValueError("Budget month must be the first day of the month")
         return v
+
+class BudgetUpdate(BaseModel):
+    amount: float
+    month: date
     
