@@ -8,6 +8,6 @@ app.include_router(budgets.router)
 app.include_router(categories.router)
 app.include_router(transactions.router)
 app.include_router(users.router)
-#app.include_router(analytics.router)
+app.include_router(analytics.router)
 
  
