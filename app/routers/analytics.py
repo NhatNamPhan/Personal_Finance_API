@@ -69,3 +69,29 @@ async def get_spending(user_id: int, start_date: date, end_date: date):
         raise HTTPException(status_code=500, detail=f"Database error: {e.pgerror}")
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Internal server error: {str(e)}")
+
+@router.get("users/{user_id}/budgets/progress")
+async def get_progress(user_id: int, month: date):
+    try:
+        with get_db() as cur:
+            check_exists("users", "user_id", user_id)
+            cur.execute('''
+                WITH spent AS (
+                    SELECT t.category_id, SUM(t.amount) AS spent
+                    FROM transactions t
+                    JOIN accounts a ON a.account_id = t.account_id
+                    WHERE a.user_id = 1 AND t.type = 'expense'
+                    GROUP BY t.category_id
+                )
+                SELECT 
+                    b.user_id,
+                    b.category_id,
+                    c.name,
+                    b.amount AS budget_amount,
+                    COALESCE(s.spent, 0) AS spent
+                FROM budgets b
+                JOIN categories c ON c.category_id = b.category_id
+                LEFT JOIN spent s ON s.category_id = b.category_id
+                WHERE b.user_id = %s
+                    AND b.month = %s;     
+                ''', (user_id, month))
