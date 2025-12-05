@@ -3,6 +3,9 @@ uvicorn[standard]
 psycopg2-binary
 python-dotenv
 pydantic
+pydantic-settings
+pydantic[email]
 typing-extensions
 sqlalchemy
-pydantic[email]
+passlib[bcrypt]
+python-jose[cryptography]
