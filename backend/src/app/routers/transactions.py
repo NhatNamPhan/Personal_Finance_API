@@ -43,6 +43,12 @@ async def get_trans_by_user_or_date(
                     ORDER BY trans.date DESC
                 ''', (user_id,))
                 rows = cur.fetchall()
+                if not rows:
+                    return {
+                        "user_id": user_id,
+                        "transactions": []
+                    }
+                
                 transactions = [{
                     "transaction_id": row[2],
                     "category": row[3],
@@ -69,6 +75,13 @@ async def get_trans_by_user_or_date(
                     ORDER BY trans.date DESC
                 ''', (user_id, start_date, end_date))
                 rows = cur.fetchall()
+                
+                if not rows:
+                    return {
+                        "user_id": user_id,
+                        "transactions": []
+                    }
+
                 transactions = [{
                     "transaction_id": row[2],
                     "category": row[3],
